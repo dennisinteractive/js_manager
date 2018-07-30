@@ -91,15 +91,3 @@ function js_manager_schema() {
 function js_manager_uninstall() {
   drupal_uninstall_schema('js_manager_add_js');
 }
-
-/**
- * Create js_manager_add_js table and populate values from hook.
- */
-function js_manager_update_7001() {
-  ctools_include('export');
-
-  // Create database if needed.
-  if (db_table_exists('js_manager_add_js') == FALSE) {
-    drupal_install_schema('js_manager_add_js');
-  }
-}
