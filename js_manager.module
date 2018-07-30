@@ -1,0 +1,91 @@
+<?php
+/**
+ * @file
+ * JavaScript Manager.
+ */
+
+/**
+ * Implementation of hook_ctools_plugin_api().
+ */
+function js_manager_ctools_plugin_api($owner, $api) {
+  if ($owner == 'js_manager' && $api == 'default_js_manager_add_js') {
+    return array('version' => 1);
+  }
+}
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function js_manager_ctools_plugin_directory($module, $type) {
+  // Load the export_ui plugin.
+  if ($type == 'export_ui') {
+    return 'plugins/export_ui';
+  }
+}
+
+/**
+ * Implements template_preprocess_page().
+ */
+function js_manager_preprocess_page(&$variables) {
+  foreach (js_manager_get_js_items() as $item) {
+    if (!empty($item->exclude_admin) && path_is_admin(current_path())) {
+      continue;
+    }
+    $options = array(
+      'type' => $item->js_type,
+      'scope' => $item->scope,
+      'weight' => (int) $item->weight,
+    );
+    switch ($item->js_type) {
+      case 'external':
+        if (!empty($item->external_js_async)) {
+          $options['attributes']['async'] = 'async';
+        }
+        drupal_add_js(trim($item->external_js), $options);
+        break;
+      case 'inline':
+        drupal_add_js($item->inline_js, $options);
+        break;
+    }
+  }
+}
+
+/**
+ * Get JS items.
+ *
+ * @return array
+ */
+function js_manager_get_js_items() {
+  // Statically cache the JS items.
+  $js = &drupal_static(__FUNCTION__);
+  if (is_array($js)) {
+    return $js;
+  }
+
+  // Fetch from cache.
+  if ($cache_js = cache_get('js_manager_add_js', 'cache')) {
+    $js = $cache_js->data;
+    return $js;
+  }
+
+  // Load the JS items from the DB.
+  ctools_include('export');
+  $js = ctools_export_crud_load_all('js_manager_add_js');
+
+  // Cache the results.
+  cache_set('js_manager_add_js', $js, 'cache');
+
+  return $js;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function js_manager_permission() {
+  return array(
+    'manage javascript items' => array(
+      'title' => t('Manage JavaScript Items'),
+      'description' => t('Allows management of external and inline JavaScript.'),
+    ),
+  );
+}
