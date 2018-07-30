@@ -5,3 +5,4 @@ core = 7.x
 dependencies[] = ctools
 files[] = plugins/export_ui/js_manager_add_js_ui.class.php
 files[] = plugins/export_ui/js_manager_add_js_ctools_export_ui.inc
+files[] = tests/js_manager.test
