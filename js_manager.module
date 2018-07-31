@@ -71,6 +71,11 @@ function js_manager_get_js_items() {
   // Load the JS items from the DB.
   ctools_include('export');
   $js = ctools_export_crud_load_all('js_manager_add_js');
+  foreach ($js as $key => $js_item) {
+    if (isset($js_item->disabled) && $js_item->disabled) {
+      unset($js[$key]);
+    }
+  }
 
   // Cache the results.
   cache_set('js_manager_add_js', $js, 'cache');
