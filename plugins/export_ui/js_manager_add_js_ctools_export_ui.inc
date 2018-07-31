@@ -11,7 +11,7 @@ $plugin = array(
   // Define a permission users must have to access these pages.
   // Define the menu item.
   'menu' => array(
-    'menu item' => 'js_manager_add_js',
+    'menu item' => 'js_manager',
     'menu title' => 'JavaScript',
     'menu description' => 'Manage inline and external JavaScript.',
   ),

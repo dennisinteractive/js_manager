@@ -16,7 +16,7 @@ This module requires the following modules:
 * `Manage JavaScript Items`: Allows management of external and inline JavaScript.
 
 ## Usage
-JavaScript items can be configured at `/admin/structure/js_manager_add_js`
+JavaScript items can be configured at `/admin/structure/js_manager`
 
   | Property               | Description                                             |
   | ---------------------- | ------------------------------------------------------- |
