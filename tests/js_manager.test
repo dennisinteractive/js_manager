@@ -28,7 +28,8 @@ class JsManagerTest extends DrupalWebTestCase {
    * @param $xpath
    */
   protected function assertXPath($xpath) {
-    $this->assertTrue(!empty($this->xpath($xpath)), t('XPath query @xpath returned no results.', array('@xpath' => $xpath)));
+    $result = $this->xpath($xpath);
+    $this->assertTrue(!empty($result), t('XPath query @xpath returned no results.', array('@xpath' => $xpath)));
   }
 
   /**
