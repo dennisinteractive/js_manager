@@ -104,6 +104,8 @@ function js_manager_add_js_ctools_export_ui_form(&$form, &$form_state) {
   );
   $form['weight'] = array(
     '#type' => 'textfield',
+    '#maxlength' => 5,
+    '#size' => 5,
     '#title' => t('Weight'),
     '#description' => 'Weight to control the order of scripts.',
     '#default_value' => $form_state['item']->weight,
