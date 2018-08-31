@@ -126,7 +126,7 @@ function js_manager_add_js_ctools_export_ui_form(&$form, &$form_state) {
   $form['scope_lock'] = array(
     '#type' => 'checkbox',
     '#title' => t('Scope lock'),
-    '#description' => 'Tick this if you NEED the file in the selected scope',
+    '#description' => 'Tick this if advagg has the option "force JS to bottom" enabled, locks scripts scope.',
     '#default_value' => $form_state['item']->scope_lock,
   );
 }
