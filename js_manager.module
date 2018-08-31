@@ -35,6 +35,7 @@ function js_manager_preprocess_page(&$variables) {
       'type' => $item->js_type,
       'scope' => $item->scope,
       'weight' => (int) $item->weight,
+      'scope_lock' => $item->scope_lock ? TRUE: FALSE,
     );
     switch ($item->js_type) {
       case 'external':

@@ -123,6 +123,12 @@ function js_manager_add_js_ctools_export_ui_form(&$form, &$form_state) {
     '#description' => 'Where the script should be added.',
     '#default_value' => $form_state['item']->scope,
   );
+  $form['scope_lock'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Scope lock'),
+    '#description' => 'Tick this if you NEED the file in the selected scope',
+    '#default_value' => $form_state['item']->scope_lock,
+  );
 }
 
 /**
