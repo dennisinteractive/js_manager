@@ -111,6 +111,9 @@ function js_manager_uninstall() {
   drupal_uninstall_schema('js_manager_add_js');
 }
 
+/**
+ * Adds scope_lock option to JS scripts
+ */
 function js_manager_update_7001() {
    $schema = drupal_get_schema('js_manager_add_js');
   db_add_field('js_manager_add_js', 'scope_lock', $schema['fields']['scope_lock']); 
