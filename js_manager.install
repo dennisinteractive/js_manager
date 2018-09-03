@@ -73,6 +73,13 @@ function js_manager_schema() {
         'not null' => TRUE,
         'default' => 'header',
       ),
+      'scope_lock' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 1,
+        'unsigned' => TRUE,
+      ),
       'weight' => array(
         'type' => 'int',
         'not null' => TRUE,
@@ -90,4 +97,19 @@ function js_manager_schema() {
  */
 function js_manager_uninstall() {
   drupal_uninstall_schema('js_manager_add_js');
+}
+
+/**
+ * Adds scope_lock option to JS scripts
+ */
+function js_manager_update_7001() {
+  $table = 'js_manager_add_js';
+  $spec = array(
+    'type' => 'int',
+    'size' => 'tiny',
+    'not null' => TRUE,
+    'default' => 1,
+    'unsigned' => TRUE,
+  );
+  db_add_field($table, 'scope_lock', $spec);
 }
