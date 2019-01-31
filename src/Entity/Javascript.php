@@ -5,6 +5,7 @@ namespace Drupal\js_manager\Entity;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Config\Entity\ConfigEntityBase;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\Render\Markup;
 
 /**
  * Defines the Javascript entity.
@@ -211,8 +212,9 @@ class Javascript extends ConfigEntityBase implements JavascriptInterface {
     }
     // If internal, add inline js.
     if ($this->getJsType() == 'inline') {
-      $custom_script['#value'] = $this->getInlineJs();
+      $custom_script['#value'] = Markup::create($this->getInlineJs());
     }
+
     return $custom_script;
   }
 
